@@ -7,11 +7,17 @@ class Security {
     public  function isLogin(){
 
         return function(){
-             if ( !isset($_SESSION['stemer_ticket'] ) ) {
-            $app = \Slim\Slim::getInstance();
-            $app->flash('error', 'Login required');
-            $app->redirect('./login');
-        }
+            if ( !isset($_SESSION['stemer_ticket'] ) ) {
+                $app = \Slim\Slim::getInstance();
+                $app->flash('error', 'Login required');
+                $app->redirect('./login');
+
+                //echo "Login MAL Security";
+            }
+
+
+            // Tenemos el ticket Comprobamos.
+
 
         };
 
@@ -31,10 +37,12 @@ class Security {
                 "clientip" =>  $req -> getIp()
             ));
 
-        if ( $ti->save() ){
-            $_SESSION['stemer_ticket'] =  $ticket ;
+        $ti->save() ;
+        $_SESSION['stemer_ticket'] =  $ticket ;
 
-        }
+           
+
+        
 
 
   

@@ -12,7 +12,10 @@ class Controller {
             $app = \Slim\Slim::getInstance();
     
 
-            $app->render('home');
+            $app->render('home' , array(
+
+            	'username' => "Francisco Carrizales"
+            ) );
 
         };
 
@@ -22,17 +25,42 @@ class Controller {
     public function PostLogin(){
     	return function(){
     		$app = \Slim\Slim::getInstance();
-		    $username =  $app->request->post('username');
-		    $password = $app->request->post('password');
-		    $model = \User::where('username', '=', $username)->firstOrFail();
-		    $salt = $app->salt ;
-		    if( $model->password == sha1( $salt. $password ) ) {
-		        $secure = new \Stemer\Security();
-		        $secure->doLogin($model);
-		        $app->redirect('./');
-		    }
+    		$error = false;
+
+    		try {
+
+    			$username =  $app->request->post('username');
+			    $password = $app->request->post('password');
+			    $app->log->debug("Usuario:  " . $username);
+			    $app->log->debug("Pass: " . $password);
+			    
+			    $model = \User::where('username', '=', $username)->firstOrFail();
+
+			    $salt = $app->salt ;
+			    if( $model->password == sha1( $salt. $password ) ) {
+
+			        $secure = new \Stemer\Security();
+			        $secure->doLogin($model);
+ 
+			    } 
+    			
+    		} catch (\Exception $e) {
+
+    			unset( $_SESSION);
+
+    			$app->log->debug("Ocurrio un error ".time());
+
+    			$app->log->debug( $e );
+    			
+    			
+    		}
+			
+			if( $error )
+				$app->redirect('./login'); 
+			else
+				$app->redirect('./');
 		    
-		    $app->redirect('./login');
+		  
 
     	};
     }
@@ -40,6 +68,8 @@ class Controller {
     public function LoginForm(){
     	return function(){
     		$app = \Slim\Slim::getInstance();
+
+
     		$salt = $app->salt ;
     		$app->render('login');
 

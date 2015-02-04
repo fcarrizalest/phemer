@@ -1,5 +1,7 @@
 salt: 'sdgrXAxDlsNldhFcUGjS7z7mB'
 debug: true
+INETROOT: '/~fcarrizalest/05'
+LOCALURL_ROOT: 'http://127.0.0.1'
 paths:
     migrations: %%PHINX_CONFIG_DIR%%/migrations
 

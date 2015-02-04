@@ -22,6 +22,4 @@ $app->get('/logout',$Controller->LogOut() );
 
 
 $app->run();
-
-
 ?>

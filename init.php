@@ -3,7 +3,18 @@
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 use Symfony\Component\Yaml\Parser;
-
+class CustomErrorMiddleware extends \Slim\Middleware
+{
+    public function call()
+    {
+        // Set new error output
+        $env = $this->app->environment;
+        $env['slim.errors'] = fopen('./error.log', 'w');
+ 		
+        // Call next middleware
+        $this->next->call();
+    }
+}
 
 $yaml = new Parser();
 
@@ -38,11 +49,16 @@ $capsule->bootEloquent();
 
 $app = new \Slim\Slim(array(
          'view' => new \Slim\Views\Blade(),
-         'templates.path' => './templates'
+         'templates.path' => './templates',
+         'log.level' => \Slim\Log::DEBUG,
+           
     ));
+
+$app->config('debug', $value['debug']);
 
 
 $app->salt = $salt ;
+
 
 $app->add(new \Slim\Middleware\SessionCookie(array(
     'expires' => '20 minutes',
@@ -62,4 +78,14 @@ $view->parserOptions = array(
     'cache' => dirname(__FILE__) . '/cache'
 );
 
+$app->hook('slim.after.router', function () use ($app) {
+    $request = $app->request;
+    $response = $app->response;
+
+    $app->log->debug('Request path: ' . $request->getPathInfo());
+    $app->log->debug('Response status: ' . $response->getStatus());
+    // And so on ...
+});
+
+$app->add(new \CustomErrorMiddleware());
 ?>
