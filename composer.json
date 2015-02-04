@@ -1,0 +1,15 @@
+{
+    "require": {
+        "slim/slim": "*",
+        "illuminate/database": "*",
+        "lastcraft/simpletest":"*",
+        "clickcoder/slim-blade": "dev-master",
+        "robmorgan/phinx": "*"
+    },
+    "autoload": {
+    	"psr-4" : {"Stemer\\" : "vendor/../src/Stemer"},
+        "classmap":[
+                "vendor/../src/Stemer/Models"
+        ]
+    }
+}
