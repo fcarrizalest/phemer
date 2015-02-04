@@ -3,7 +3,7 @@ INSTALL
 Ejecutar desde la consola  el siguiente comando para
 la instalación de composer
 
-curl -s https://getcomposer.org/installer | php
+		curl -s https://getcomposer.org/installer | php
 
 Una vez que composer esta instalado instalar las dependencias.
 
