@@ -29,20 +29,41 @@ class TestOfLogin extends WebTestCase{
 		$parameters['password'] = "00";
 
 		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/login" , $parameters  );
-
+		unset( $parameters );
+		sleep(1);
 		$this->assertText('Dashboard', "Deberiamos estar logueados");
 
-		$this->get( $this->_LOCALURL_ROOT.$this->_INETROOT."/logout" );
-
-		$this->assertText('Sign In');
-
+		$this->get( $this->_LOCALURL_ROOT.$this->_INETROOT."/logout");
+		sleep(1);
+ 		$this->assertText('Sign In');
 
 		$parameters['username'] = "admi";
 		$parameters['password'] = "00";
 
 		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/login" , $parameters  );
+		sleep(1);
 
 		$this->assertText('Sign In');
+
+		$parameters['username'] = "admin";
+		$parameters['password'] = "00";
+
+		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/login" , $parameters  );
+		sleep(1);
+		unset( $parameters );
+		$this->assertText('Dashboard', "Deberiamos estar logueados");
+
+
+		//  CheckTicket... 
+
+		$this->get( $this->_LOCALURL_ROOT.$this->_INETROOT."/index.php" );
+		sleep(1);
+		$this->assertText('Dashboard', "Deberiamos estar logueados");
+
+
+		$this->get( $this->_LOCALURL_ROOT.$this->_INETROOT."/logout");
+		
+ 		$this->assertText('Sign In');
 	}
 
 }

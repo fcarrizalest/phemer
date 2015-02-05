@@ -37,6 +37,7 @@ class Security {
                 "clientip" =>  $req -> getIp()
             ));
 
+        $app->log->error("Creamos un ticket: " .  $ticket );
         $ti->save() ;
         $_SESSION['stemer_ticket'] =  $ticket ;
 
@@ -48,9 +49,28 @@ class Security {
   
     }
 
-    public function checkTicket(){
+    public function CheckTicket( ){
+        $app = \Slim\Slim::getInstance();
 
+        
+        $ticket = $_SESSION['stemer_ticket'] ;
 
+        try {
+            
+            $ticketO = \Ticket::where('ticketid', '=', $ticket  )->firstOrFail();
+            $ticketO->touch();
+            $ticketO->save();
+            $app->log->alert( $ticketO->user );
+            
+            return $ticketO->user;
+
+        } catch (\Exception $e) {
+             unset($_SESSION['stemer_ticket'] );
+             $app->log->error( "Ocurrio un error. " );
+             $app->log->error( $e );
+        }
+        $app->redirect('./login');
+        
     }
 
     private function RandomString(){

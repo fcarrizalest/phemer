@@ -1,25 +1,44 @@
 <?php
-
 namespace Stemer;
 
 class Controller {
 
 
-	 public function DashBoard(){
+	public function DashBoard(){
 
         return function() {
 
             $app = \Slim\Slim::getInstance();
-    
+            
+            $secure = new \Stemer\Security();
+            
+            $user = $secure->CheckTicket();
 
             $app->render('home' , array(
 
-            	'username' => "Francisco Carrizales"
+            	'username' => $user->username
             ) );
 
         };
 
     }
+
+
+    public function People(){
+        return function(){
+            $app = \Slim\Slim::getInstance();
+            $secure = new \Stemer\Security();
+            
+            $user = $secure->CheckTicket();
+            $app->render('home' , array(
+
+                'username' => $user->username
+            ) );
+        };
+    }
+
+
+
 
 
     public function PostLogin(){
@@ -47,17 +66,18 @@ class Controller {
     		} catch (\Exception $e) {
 
     			unset( $_SESSION);
-
+                $error = TRUE;  
     			$app->log->debug("Ocurrio un error ".time());
 
-    			$app->log->debug( $e );
+    			$app->log->debug( $e ->getMessage());
     			
     			
     		}
 			
-			if( $error )
+			if( $error ){
+                $app->log->debug("Redireccionado al login ");
 				$app->redirect('./login'); 
-			else
+			}else
 				$app->redirect('./');
 		    
 		  
@@ -83,10 +103,24 @@ class Controller {
     		$app = \Slim\Slim::getInstance();
 
     		if( isset( $_SESSION['stemer_ticket'] )){
-       			unset( $_SESSION['stemer_ticket'] );
+                //Necesitamos borrar el ticket actual.
+                $t = $_SESSION['stemer_ticket'];
+
+                
+       			unset( $_SESSION['stemer_ticket']  );
+                try {
+                    $ticket = \Ticket::where('ticketid', '=', $t  )->firstOrFail();
+                    if($ticket )    
+                        $ticket ->forceDelete(); 
+                } catch (\Exception $e) {
+                    $app->log->error( "Error al borrar el ticket " ); 
+
+                    $app->log->error( $e );
+                }
+                
     		}
 
-
+           
     		$app->redirect('./login');
 
     	};

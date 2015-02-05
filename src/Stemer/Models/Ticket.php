@@ -13,12 +13,13 @@ class Ticket extends \Illuminate\Database\Eloquent\Model
 		$this->fillable( $fillable);
 		parent::__construct($attributes);
 
-
+		
 	}
 
-	public function users()
-    {
-        return $this->belongsToMany('User','users_roles','rid','uid');
-    }
+	public function user(){
+
+		return $this->hasOne('User','id','uid');
+	}
+	
 }
 ?>

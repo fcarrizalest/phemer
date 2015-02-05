@@ -16,12 +16,8 @@
 @stop
 
 @section('content')
-    <div class="row">
-            <div class="col-xs-12">
-            		<p>This is my body content.</p>
-    
-            </div>
-    </div>
+    <p>This is my body content.</p>
+
 
     
 @stop
