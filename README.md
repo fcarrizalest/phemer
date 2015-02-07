@@ -30,9 +30,19 @@ Instalación de las Tablas....
 
 Referencias: 
 
-http://phinx.readthedocs.org/
+		http://phinx.readthedocs.org/
 
-http://www.simpletest.org/en/unit_test_documentation.html
+		http://www.simpletest.org/en/unit_test_documentation.html
+
+
+Utilerias
+
+		http://pythonhosted.org//watchdog/
+
+
+		watchmedo shell-command --patterns="*.php;*.js;*.html"  --recursive --command 'php ./test/bootstrap.php '
+		
+
 
 
 

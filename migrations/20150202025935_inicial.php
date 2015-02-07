@@ -66,8 +66,6 @@ class Inicial extends AbstractMigration
         $table->addColumn('clientip', 'string', array('limit' => 40 , 'null' => false) );
 
 
-        $table->addColumn('logon', 'datetime' );
-
         $table->addColumn('created_at' , 'datetime'  );
         $table->addColumn('updated_at' , 'datetime' );
         
@@ -104,21 +102,33 @@ class Inicial extends AbstractMigration
 
                                             (NULL, 'admin', 'admin@domain.com', '".$pass."', '1', '2015-02-02 00:00:00', '2015-02-02 00:00:00'); " ;
         
-        $count = $this->execute( $sql ); // returns the number of affected rows
+        $this->execute( $sql ); // returns the number of affected rows
 
 
 
 
         $sql = "INSERT INTO `".$db."`.`role` (`id`, `name`) VALUES (NULL, 'admin');";
 
-        $count = $this->execute( $sql ); // returns the number of affected rows
+        $this->execute( $sql ); // returns the number of affected rows
 
         // Agregamos
 
 
         $sql = "INSERT INTO `".$db."`.`users_roles` (`id`, `uid`, `rid`) VALUES (NULL, '1', '1'); ";
         
-        $count = $this->execute( $sql ); // returns the number of affected rows
+        $this->execute( $sql ); // returns the number of affected rows
+
+
+
+        $sql = "INSERT INTO `".$db."`.`role_permission` (`id`, `rid`, `permission`) VALUES (NULL, '1', 'administer permissions');";
+        $this->execute( $sql );
+
+        $sql = "INSERT INTO `".$db."`.`role_permission` (`id`, `rid`, `permission`) VALUES (NULL, '1', 'administer users');";
+        $this->execute( $sql );
+
+        $sql = "INSERT INTO `".$db."`.`role_permission` (`id`, `rid`, `permission`) VALUES (NULL, '1', 'view user profiles');";
+        $this->execute( $sql );
+
 
 
 

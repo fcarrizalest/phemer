@@ -10,14 +10,8 @@ class Controller {
 
             $app = \Slim\Slim::getInstance();
             
-            $secure = new \Stemer\Security();
-            
-            $user = $secure->CheckTicket();
-
-            $app->render('home' , array(
-
-            	'username' => $user->username
-            ) );
+        
+            $app->render('home' );
 
         };
 
@@ -27,12 +21,11 @@ class Controller {
     public function People(){
         return function(){
             $app = \Slim\Slim::getInstance();
-            $secure = new \Stemer\Security();
             
-            $user = $secure->CheckTicket();
-            $app->render('home' , array(
-
-                'username' => $user->username
+            $users =  \User::all();
+            $app->render('people' , array(
+                "users" => $users
+               
             ) );
         };
     }

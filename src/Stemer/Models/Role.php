@@ -4,7 +4,7 @@ class Role extends \Illuminate\Database\Eloquent\Model
 {
 
 
-	 protected $table = 'role';
+	protected $table = 'role';
 
 	public function __construct(array $attributes = array())
 	{
@@ -16,9 +16,17 @@ class Role extends \Illuminate\Database\Eloquent\Model
 
 	}
 
+
+
 	public function users()
     {
         return $this->belongsToMany('User','users_roles','rid','uid');
+    }
+
+    public function permission(){
+
+
+    	return $this->hasMany('Permission','rid','id');
     }
 }
 ?>

@@ -7,17 +7,40 @@ class Security {
     public  function isLogin(){
 
         return function(){
+            $app = \Slim\Slim::getInstance();
             if ( !isset($_SESSION['stemer_ticket'] ) ) {
-                $app = \Slim\Slim::getInstance();
-                $app->flash('error', 'Login required');
+                
+                //$app->flash('error', 'Login required');
                 $app->redirect('./login');
 
                 //echo "Login MAL Security";
             }
 
+            $secure = new \Stemer\Security();
+            
+            $user =  $secure->CheckTicket();
+
+            $app->_user = $user;
+            $app->_permission = $user->getPermissionArray();
+            
+
+            $app->view->set("username" , $user->username );
+            $app->view->set("permission" , $app->_permission );
 
             // Tenemos el ticket Comprobamos.
 
+
+
+        };
+
+    }
+
+    public function checkPermission( $key ){
+
+        return function( ) use ($key ){
+            $app = \Slim\Slim::getInstance();
+            if( !in_array($key, $app->_permission ) )
+                $app->halt(403, 'You shall not pass!');
 
         };
 
@@ -51,16 +74,23 @@ class Security {
 
     public function CheckTicket( ){
         $app = \Slim\Slim::getInstance();
+        $req = $app->request;
 
         
         $ticket = $_SESSION['stemer_ticket'] ;
 
         try {
             
-            $ticketO = \Ticket::where('ticketid', '=', $ticket  )->firstOrFail();
-            $ticketO->touch();
+            $ticketO = \Ticket::where('ticketid', '=', $ticket  )->where('clientip','=',$req -> getIp() )->firstOrFail();
+            $ticketO->touch(); 
             $ticketO->save();
             $app->log->alert( $ticketO->user );
+            
+            $ticketD = \Ticket::where('uid', '=', $ticketO->user->id  )
+                                ->where('ticketid', '!=', $ticket );
+            
+            if(count($ticketD) > 0)
+                $ticketD->forceDelete();
             
             return $ticketO->user;
 

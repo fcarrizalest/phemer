@@ -132,15 +132,29 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-gear "></i> <span>Configuration</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
 
 
               <ul class="treeview-menu">
-                <li class="active"><a href="index.html"><i class="fa fa-angle-double-right"></i> Dashboard v1</a></li>
-              
+                
+                  @section('main_menu')
+                  
+                  @if ( in_array( "administer users"  , $permission ))
+                   <li><a href="./people"><i class="fa fa-angle-double-right"></i> People</a></li>
+                  @endif
+
+
+
+                  @if ( in_array( "administer permissions"  , $permission ))
+                   <li><a href="./people/permissions"><i class="fa fa-angle-double-right"></i> Permissions</a></li>
+                  @endif
+
+                  
+
+                  @show
 
               </ul>
 
@@ -179,10 +193,9 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Dashboard
-            <small>Control panel</small>
-          </h1>
+
+          @yield('content-header')
+          
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
