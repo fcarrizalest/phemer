@@ -22,6 +22,7 @@
 
     
       <form action="login" method="post">
+        <input type="hidden" name="{{{$csrf_key}}}" value ="{{{$csrf_token}}}" />
         <div class="body bg-gray">
           <div class="form-group">
             <input type="text" name="username" class="form-control" placeholder="User Name"/>

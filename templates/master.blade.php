@@ -146,7 +146,7 @@
                    <li><a href="./people"><i class="fa fa-angle-double-right"></i> People</a></li>
                   @endif
 
-
+                  
 
                   @if ( in_array( "administer permissions"  , $permission ))
                    <li><a href="./people/permissions"><i class="fa fa-angle-double-right"></i> Permissions</a></li>

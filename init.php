@@ -88,4 +88,5 @@ $app->hook('slim.after.router', function () use ($app) {
 });
 
 $app->add(new \CustomErrorMiddleware());
+$app->add( new \Stemer\Utils\CsrfGuard() );
 ?>
