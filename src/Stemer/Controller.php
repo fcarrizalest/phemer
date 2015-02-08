@@ -31,7 +31,53 @@ class Controller {
     }
 
 
+    public function NewUser( ){
+        return function(){
+            $app = \Slim\Slim::getInstance();
 
+            $app->render('formUser' , array(
+              
+               
+            ) );
+        };
+    }
+
+    public function PostNewUser(){
+        return function(){
+            $app = \Slim\Slim::getInstance();
+
+            try {
+
+                $salt = $app->salt ;
+                // @TODO Validar los datos de entrada..
+                $array['username'] = $app->request->post('username');
+                $array['password'] = sha1( $salt.$app->request->post('password'));
+
+                $array['email'] = $app->request->post('email');
+                $array['active'] = true;
+
+
+                $user = new \User( $array );
+
+                $user->save();
+
+                
+            } catch (Exception $e) {
+
+
+                
+            }
+
+
+            $app->redirect('./people');
+
+            
+
+
+
+
+        };
+    }
 
 
     public function PostLogin(){

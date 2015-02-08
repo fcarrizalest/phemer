@@ -26,8 +26,8 @@ class Inicial extends AbstractMigration
 
         $table = $this->table('users');
         
-        $table->addColumn('username' , 'string', array('limit' => 144 , 'null' => false));
-        $table->addColumn('email' , 'string' , array('limit' => 255 ));
+        $table->addColumn('username' , 'string', array('limit' => 144  ,'null' => false));
+        $table->addColumn('email' , 'string' , array('limit' => 255   ));
         $table->addColumn('password' , 'text'  );
         $table->addColumn('active','boolean' );
 
@@ -35,6 +35,7 @@ class Inicial extends AbstractMigration
         $table->addColumn('updated_at' , 'datetime' );
         
 
+        $table->addIndex(  array('username' ) , array('unique' => true)  ) ; 
         $table->addIndex(array('username', 'email'), array('unique' => true));
    
 

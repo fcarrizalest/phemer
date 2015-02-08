@@ -28,6 +28,13 @@ class TestOfLogin extends WebTestCase{
 		$parameters['username'] = "admin";
 		$parameters['password'] = "00";
 
+		$this->get( $this->_LOCALURL_ROOT.$this->_INETROOT."/login"   );
+
+		$browser = $this->getBrowser();
+		$csrf_token = $browser->getFieldByName("csrf_token");
+
+		$parameters['csrf_token'] = $csrf_token ;
+
 		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/login" , $parameters  );
 		unset( $parameters );
 		sleep(1);
@@ -39,6 +46,12 @@ class TestOfLogin extends WebTestCase{
 
 		$parameters['username'] = "admi";
 		$parameters['password'] = "00";
+		$this->get( $this->_LOCALURL_ROOT.$this->_INETROOT."/login"   );
+		$browser = $this->getBrowser();
+		$csrf_token = $browser->getFieldByName("csrf_token");
+
+		$parameters['csrf_token'] = $csrf_token ;
+
 
 		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/login" , $parameters  );
 		sleep(1);
@@ -47,6 +60,12 @@ class TestOfLogin extends WebTestCase{
 
 		$parameters['username'] = "admin";
 		$parameters['password'] = "00";
+		$this->get( $this->_LOCALURL_ROOT.$this->_INETROOT."/login"   );
+		$browser = $this->getBrowser();
+		$csrf_token = $browser->getFieldByName("csrf_token");
+
+		$parameters['csrf_token'] = $csrf_token ;
+
 
 		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/login" , $parameters  );
 		sleep(1);
@@ -55,6 +74,9 @@ class TestOfLogin extends WebTestCase{
 
 
 		//  CheckTicket... 
+
+		 
+
 
 		$this->get( $this->_LOCALURL_ROOT.$this->_INETROOT."/index.php" );
 		sleep(1);
