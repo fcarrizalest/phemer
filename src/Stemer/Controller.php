@@ -30,6 +30,24 @@ class Controller {
         };
     }
 
+    public function PostDeleteUser(){
+
+        return function($id){
+            $app = \Slim\Slim::getInstance();
+
+            try {
+                 $model = \User::findOrFail($id);
+                 $model->forceDelete();
+
+                
+
+            } catch (\Exception $e) {
+                
+            }
+            $app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/people');
+        }; 
+    }
+
 
     public function NewUser( ){
         return function(){
@@ -39,6 +57,54 @@ class Controller {
               
                
             ) );
+        };
+    }
+
+    public function EditUser(){
+
+        return function($id){
+
+            $app = \Slim\Slim::getInstance();
+
+            try {
+                
+                $model = \User::findOrFail($id);
+
+                $app->render('formUser' , array( 'user' => $model ) );
+
+            } catch (\Exception $e) {
+                
+            }
+
+
+          
+        };
+    }
+
+    public function PostEditUser(){
+
+        return function($id){
+            $app = \Slim\Slim::getInstance();
+
+            try {
+                $model = \User::findOrFail($id);
+                $salt = $app->salt ;
+                $model->username = $app->request->post('username');
+                
+                if($app->request->post('password')  )
+                    $model->password = sha1( $salt.$app->request->post('password'));
+
+                $model->email = $app->request->post('email');
+                $model->active  = true;
+
+                $model->save();
+
+                
+            } catch (\Exception $e) {
+                
+            }
+
+             $app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/people');
         };
     }
 
@@ -62,14 +128,14 @@ class Controller {
                 $user->save();
 
                 
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
 
 
                 
             }
 
 
-            $app->redirect('./people');
+            $app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/people');
 
             
 
@@ -115,9 +181,9 @@ class Controller {
 			
 			if( $error ){
                 $app->log->debug("Redireccionado al login ");
-				$app->redirect('./login'); 
+				$app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/login'); 
 			}else
-				$app->redirect('./');
+				$app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/');
 		    
 		  
 
@@ -160,7 +226,7 @@ class Controller {
     		}
 
            
-    		$app->redirect('./login');
+    		$app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/login');
 
     	};
     }

@@ -11,7 +11,8 @@ class Security {
             if ( !isset($_SESSION['stemer_ticket'] ) ) {
                 
                 //$app->flash('error', 'Login required');
-                $app->redirect('./login');
+                
+                $app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/login');
 
                 //echo "Login MAL Security";
             }
@@ -99,7 +100,7 @@ class Security {
              $app->log->error( "Ocurrio un error. " );
              $app->log->error( $e );
         }
-        $app->redirect('./login');
+        $app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/login');
         
     }
 

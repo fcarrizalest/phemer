@@ -21,34 +21,60 @@
     <div class="col-xs-12">
     	<div class="box box-primary">
     		<div class="box-header">
-                  <h3 class="box-title">New User</h3>
+            @if ( isset(  $user ) )
+              <h3 class="box-title">Edit User</h3>
+            @else
+              <h3 class="box-title">New User</h3>
+
+            @endif
+
+                  
             </div>
             <div class="box-body">
-            	<form action="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people" method="post" role="form">
+
+              @if ( isset(  $user ) )
+                <form action="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people/{{{$user->id}}}" method="post" role="form">
+              
+              @else
+                <form action="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people" method="post" role="form">
+              
+              @endif
             		<input type="hidden" name="{{{$csrf_key}}}" value ="{{{$csrf_token}}}" />
             		
             		<div class="form-group">
 	            		<div class="input-group">
 	                    	
 	                    	<span class="input-group-addon">@</span>
-	                      	<input type="text" name="username" class="form-control" placeholder="UserName">
-	                    </div>
+                          @if ( isset(  $user ) )
+	                      	<input type="text" value="{{{ $user->username or '' }}}" name="username" class="form-control" placeholder="UserName">
+	                       @else 
+                              <input type="text"  name="username" class="form-control" placeholder="UserName">
+                       
+                         @endif
+                      </div>
                 	</div>
 
                     
                 	<div class="form-group">
 	                    <div class="input-group">
 	                      <label> Password</label>
-	                      <input type="password" name="password" class="form-control"  placeholder="Password">
-	                    </div>
+                        
+                          <input type="password"  name="password" class="form-control"  placeholder="Password">
+                         
+                      </div>
                 	</div>
 
                 	<div class="form-group">
 	                    <div class="input-group">
 	                    	
 	                    	<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-	                    	<input type="text" name="email" class="form-control" placeholder="Email">
-	                  	</div>
+	                    	 @if ( isset(  $user ) )
+                        <input type="text" name="email" value="{{{ $user->email or '' }}}" class="form-control" placeholder="Email">
+	                  	  @else
+                        <input type="text" name="email"  class="form-control" placeholder="Email">
+                        
+                        @endif
+                      </div>
                   	</div>
 
                   	<div class="form-group">

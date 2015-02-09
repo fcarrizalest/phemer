@@ -59,6 +59,10 @@ $app->config('debug', $value['debug']);
 
 $app->salt = $salt ;
 
+$app->LOCALURL_ROOT = $value['LOCALURL_ROOT'];
+$app->INETROOT = $value['INETROOT'] ;
+
+
 //
 $app->view->set("LOCALURL_ROOT" , $value['LOCALURL_ROOT'] );
 
