@@ -12,7 +12,7 @@ class Security {
                 
                 //$app->flash('error', 'Login required');
                 
-                $app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/login');
+                $app->redirect( $app->INETROOT.'/login');
 
                 //echo "Login MAL Security";
             }
@@ -100,7 +100,7 @@ class Security {
              $app->log->error( "Ocurrio un error. " );
              $app->log->error( $e );
         }
-        $app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/login');
+        $app->redirect( $app->INETROOT.'/login');
         
     }
 

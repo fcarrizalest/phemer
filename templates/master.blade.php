@@ -11,20 +11,20 @@
     <!-- Ionicons 2.0.0 -->
     <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Morris chart -->
-    <link href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+    <link href="{{{$INETROOT}}}/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
-    <link href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link href="{{{$INETROOT}}}/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
     <!-- Date Picker -->
-    <link href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+    <link href="{{{$INETROOT}}}/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
     <!-- Daterange picker -->
-    <link href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <link href="{{{$INETROOT}}}/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
-    <link href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{{$INETROOT}}}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{{$INETROOT}}}/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
-    <link href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
-    <link href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="{{{$INETROOT}}}/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+    <link href="{{{$INETROOT}}}/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -37,7 +37,7 @@
       <!-- header logo: style can be found in header.less -->
       <header class="main-header">
         <!-- Logo -->
-        <a href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/" class="logo">Phener</a>
+        <a href="{{{$INETROOT}}}/" class="logo">Phener</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -56,13 +56,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                  <img src="{{{$INETROOT}}}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
                   <span class="hidden-xs">{{{ $username or 'Guest' }}}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <img src="{{{$INETROOT}}}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
                       {{{ $username or 'Guest' }}} - Web Developer
                       <small>Member since Nov. 2012</small>
@@ -76,7 +76,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="{{{$INETROOT}}}/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -111,7 +111,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+              <img src="{{{$INETROOT}}}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
               <p> {{{ $username or 'Guest' }}}</p>
@@ -143,13 +143,13 @@
                   @section('main_menu')
                   
                   @if ( in_array( "administer users"  , $permission ))
-                   <li><a href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people"><i class="fa fa-angle-double-right"></i> People</a></li>
+                   <li><a href="{{{$INETROOT}}}/people"><i class="fa fa-angle-double-right"></i> People</a></li>
                   @endif
 
                   
 
                   @if ( in_array( "administer permissions"  , $permission ))
-                   <li><a href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people/permissions"><i class="fa fa-angle-double-right"></i> Permissions</a></li>
+                   <li><a href="{{{$INETROOT}}}/people/permissions"><i class="fa fa-angle-double-right"></i> Permissions</a></li>
                   @endif
 
                   
@@ -197,7 +197,7 @@
           @yield('content-header')
           
           <ol class="breadcrumb">
-            <li><a href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{{$INETROOT}}}/"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
           </ol>
         </section>
@@ -222,9 +222,9 @@
 
    
 
-    <script src="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
-    <script src="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="{{{$INETROOT}}}/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="{{{$INETROOT}}}/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+    <script src="{{{$INETROOT}}}/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 
      <script type="text/javascript">
       $(function () {
@@ -240,14 +240,14 @@
       });
     </script>
 
-    <script src="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+    <script src="{{{$INETROOT}}}/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
     
     <!-- AdminLTE App -->
-    <script src="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/dist/js/app.js" type="text/javascript"></script>
+    <script src="{{{$INETROOT}}}/dist/js/app.js" type="text/javascript"></script>
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     
     <!-- AdminLTE for demo purposes -->
-    <script src="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/dist/js/demo.js" type="text/javascript"></script>
+    <script src="{{{$INETROOT}}}/dist/js/demo.js" type="text/javascript"></script>
   </body>
 </html>

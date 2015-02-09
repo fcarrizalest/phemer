@@ -33,10 +33,10 @@
             <div class="box-body">
 
               @if ( isset(  $user ) )
-                <form action="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people/{{{$user->id}}}" method="post" role="form">
+                <form action="{{{$INETROOT}}}/people/{{{$user->id}}}" method="post" role="form">
               
               @else
-                <form action="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people" method="post" role="form">
+                <form action="{{{$INETROOT}}}/people" method="post" role="form">
               
               @endif
             		<input type="hidden" name="{{{$csrf_key}}}" value ="{{{$csrf_token}}}" />

@@ -21,7 +21,7 @@
       <div class="header">Sign In</div>
 
     
-      <form action="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/login" method="post">
+      <form action="{{{$INETROOT}}}/login" method="post">
         <input type="hidden" name="{{{$csrf_key}}}" value ="{{{$csrf_token}}}" />
         <div class="body bg-gray">
           <div class="form-group">

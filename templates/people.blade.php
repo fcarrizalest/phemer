@@ -48,20 +48,20 @@
 
                         @if ($user->active  == 1 )
                          
-                         <a href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people/{{$user->id}}/edit" class="btn btn-default btn-flat"><i class="fa fa-check-circle-o"></i></a>
+                         <a href="{{{$INETROOT}}}/people/{{$user->id}}/edit" class="btn btn-default btn-flat"><i class="fa fa-check-circle-o"></i></a>
                         @endif
 
                         @if ($user->active  == 0 )
-                           <a href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people/{{$user->id}}/edit" class="btn btn-default btn-flat"><i class="fa fa-circle-o"></i></a>
+                           <a href="{{{$INETROOT}}}/people/{{$user->id}}/edit" class="btn btn-default btn-flat"><i class="fa fa-circle-o"></i></a>
                       
                         @endif
                     </td>
                    
                     <td> 
                         <div class="btn-group">
-                          <a href="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people/{{$user->id}}/edit" class="btn btn-default btn-flat">Edit</a>
+                          <a href="{{{$INETROOT}}}/people/{{$user->id}}/edit" class="btn btn-default btn-flat">Edit</a>
                             
-                            <form class="btn btn-default btn-flat"  method="post" action="{{{$LOCALURL_ROOT}}}{{{$INETROOT}}}/people/{{$user->id}}/delete"> 
+                            <form class="btn btn-default btn-flat"  method="post" action="{{{$INETROOT}}}/people/{{$user->id}}/delete"> 
                                 <input type="hidden" name="{{{$csrf_key}}}" value ="{{{$csrf_token}}}" />
                                 <input type="submit" value="delete" href="./people/{{$user->id}}/delete" />
                             </form>

@@ -42,9 +42,10 @@ class Controller {
                 
 
             } catch (\Exception $e) {
-                
+            
+
             }
-            $app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/people');
+            $app->redirect( $app->INETROOT.'/people');
         }; 
     }
 
@@ -104,7 +105,7 @@ class Controller {
                 
             }
 
-             $app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/people');
+             $app->redirect( $app->INETROOT.'/people');
         };
     }
 
@@ -135,7 +136,7 @@ class Controller {
             }
 
 
-            $app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/people');
+            $app->redirect( $app->INETROOT.'/people');
 
             
 
@@ -181,9 +182,9 @@ class Controller {
 			
 			if( $error ){
                 $app->log->debug("Redireccionado al login ");
-				$app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/login'); 
+				$app->redirect( $app->INETROOT.'/login'); 
 			}else
-				$app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/');
+				$app->redirect( $app->INETROOT.'/');
 		    
 		  
 
@@ -226,7 +227,7 @@ class Controller {
     		}
 
            
-    		$app->redirect($app->LOCALURL_ROOT . $app->INETROOT.'/login');
+    		$app->redirect( $app->INETROOT.'/login');
 
     	};
     }

@@ -3,6 +3,10 @@
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 use Symfony\Component\Yaml\Parser;
+
+
+
+
 class CustomErrorMiddleware extends \Slim\Middleware
 {
     public function call()
