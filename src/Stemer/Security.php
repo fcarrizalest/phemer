@@ -99,6 +99,9 @@ class Security {
              unset($_SESSION['stemer_ticket'] );
              $app->log->error( "Ocurrio un error. " );
              $app->log->error( $e );
+              $app->flash("error", " " . $e->getMessage());
+                
+               
         }
         $app->redirect( $app->INETROOT.'/login');
         

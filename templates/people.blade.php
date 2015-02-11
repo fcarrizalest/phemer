@@ -28,6 +28,9 @@
 @section('content')
     <div class="box-body">
 
+
+        
+        
         <a class="btn btn-default btn-flat"  href="./people/new"> New User </a>
         <table id="example2" class="table table-bordered table-hover">
             <thead>

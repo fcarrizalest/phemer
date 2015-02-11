@@ -146,14 +146,15 @@
                    <li><a href="{{{$INETROOT}}}/people"><i class="fa fa-angle-double-right"></i> People</a></li>
                   @endif
 
-                  
+                  @if ( in_array( "administer permissions"  , $permission ))
+                   <li><a href="{{{$INETROOT}}}/people/roles"><i class="fa fa-angle-double-right"></i> Roles</a></li>
+                  @endif
 
                   @if ( in_array( "administer permissions"  , $permission ))
                    <li><a href="{{{$INETROOT}}}/people/permissions"><i class="fa fa-angle-double-right"></i> Permissions</a></li>
                   @endif
 
-                  
-
+                
                   @show
 
               </ul>
@@ -202,8 +203,27 @@
           </ol>
         </section>
 
+
+
+
         <!-- Main content -->
         <section class="content">
+
+          @if ( is_array( $flash->getMessages() )    )
+             
+             @foreach($flash->getMessages() as $error)
+
+                <div class="alert alert-danger alert-dismissable">                                        
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                    {{{$error}}}
+                  </div>
+
+                
+            @endforeach
+            
+        @endif
+
            @yield('content')
         </section><!-- /.content -->
 
