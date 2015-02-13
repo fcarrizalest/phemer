@@ -2,6 +2,7 @@
     "require": {
         "slim/slim": "*",
         "illuminate/database": "*",
+        "illuminate/validation": "*",
         "lastcraft/simpletest":"*",
         "clickcoder/slim-blade": "dev-master",
         "robmorgan/phinx": "*"

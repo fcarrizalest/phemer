@@ -11,7 +11,7 @@ class Controller {
             $app = \Slim\Slim::getInstance();
             
         
-            $app->render('home' );
+            $app->render('home' );      
 
         };
 

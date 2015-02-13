@@ -74,6 +74,37 @@ class UserController{
             $app = \Slim\Slim::getInstance();
 
             try {
+
+
+
+                $data['username'] = $app->request->post('username');
+                $rules['username'] = "required";
+
+                if($app->request->post('password')  ){
+                     $data['password'] = $app->request->post('password') ;
+                     $rules['password'] = "required|min:7";
+                }
+               
+                $data['email'] =  $app->request->post('email') ;
+                $rules['email'] = "required|email";
+
+
+                $validator = $app->Validator->make( $data, $rules ) ;
+
+                if ($validator->fails())
+                {
+                    // The given data did not pass validation
+                    $messages = $validator->messages();
+                    $m = " ";
+                    foreach ($messages->all('<li>:message</li>') as $message)
+                    {
+                        $m .= $message;
+                    }
+                    
+                    throw new \Exception($m , 1);
+                    
+                }
+
                 $model = \User::findOrFail($id);
                 $salt = $app->salt ;
                 $model->username = $app->request->post('username');
@@ -105,6 +136,37 @@ class UserController{
             try {
 
                 $salt = $app->salt ;
+
+                $data['username'] = $app->request->post('username');
+                $rules['username'] = "required|unique:users";
+
+                $data['password'] = $app->request->post('password') ;
+                $rules['password'] = "required|min:7";
+                
+               
+                $data['email'] =  $app->request->post('email') ;
+                $rules['email'] = "required|email|unique:users";
+
+                $messages = array(
+                    'required' => 'El :attribute es obligatorio.',
+                    'unique'  => "El :attribute ya existe "
+                );
+                $validator = $app->Validator->make( $data, $rules  ) ;
+
+                if ($validator->fails())
+                {
+                    // The given data did not pass validation
+                    $messages = $validator->messages();
+                    $m = " ";
+                    foreach ($messages->all(":message ") as $message)
+                    {
+                        $m .= $message ;
+                    }
+                    
+                    throw new \Exception($m , 1);
+                    
+                }
+
                 // @TODO Validar los datos de entrada..
                 $array['username'] = $app->request->post('username');
                 $array['password'] = sha1( $salt.$app->request->post('password'));
