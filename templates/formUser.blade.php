@@ -77,6 +77,25 @@
                       </div>
                   	</div>
 
+
+                    <div class="form-group">
+                      <div class="input-group">
+
+
+                        @if( isset( $roles ) )
+                             @foreach($roles as $rol)
+
+                                  @if( in_array( $rol->name , $useroles ) )
+                                  <input type="checkbox" checked="checked" name="role[]"  value="{{{$rol->id}}}"/> {{{$rol->name}}}  <br>
+                                  @else
+                                  <input type="checkbox"  name="role[]"  value="{{{$rol->id}}}"/> {{{$rol->name}}}  <br>
+                                  
+                                  @endif
+                             @endforeach
+                        @endif
+                      </div>
+                    </div>
+
                   	<div class="form-group">
 	                  	<div class="input-group">
 	                  		<input type="submit" value="Save" name="Save" >

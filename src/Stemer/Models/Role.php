@@ -5,6 +5,7 @@ class Role extends \Illuminate\Database\Eloquent\Model
 
 
 	protected $table = 'role';
+	public $timestamps = false;
 
 	public function __construct(array $attributes = array())
 	{

@@ -10,9 +10,19 @@ $Controller = new \Stemer\Controller();
 
 $UserController = new \Stemer\Controllers\UserController();
 
+$RoleController = new \Stemer\Controllers\RoleController();
+
+
 $secure = new \Stemer\Security();
 
 $app->get('/',$secure->isLogin(), $Controller->DashBoard() );
+
+$app->get('/people/roles' , $secure->isLogin(), $secure->checkPermission("administer permissions") ,$RoleController->Roles() );
+$app->post('/people/roles' , $secure->isLogin(), $secure->checkPermission("administer permissions") ,$RoleController->PostNewRol() );
+$app->get('/people/roles/new' ,$secure->isLogin(), $secure->checkPermission("administer permissions") , $RoleController->NewRol() );
+$app->get('/people/roles/:id/edit' , $secure->isLogin(), $secure->checkPermission("administer permissions") ,$RoleController->EditRol() );
+$app->post('/people/roles/:id' , $secure->isLogin(), $secure->checkPermission("administer permissions") , $RoleController->PostEditRol() );
+$app->post('/people/roles/:id/delete' , $secure->isLogin(), $secure->checkPermission("administer permissions") , $RoleController->PostDeleteRol() );
 
 
 
@@ -25,7 +35,8 @@ $app->post('/people/:id/delete' , $secure->isLogin(), $secure->checkPermission("
 
 
 
-$app->get('/people/roles' , $secure->isLogin(), $secure->checkPermission("administer permissions") ,$Controller->Roles() );
+
+
 $app->get('/people/permissions' , $secure->isLogin(), $secure->checkPermission("administer permissions") ,$Controller->Permissions() );
 
 

@@ -39,8 +39,20 @@ class UserController{
     public function NewUser( ){
         return function(){
             $app = \Slim\Slim::getInstance();
+            $roles = array();
+
+            try {
+                $roles = \Role::all();
+
+            } catch (\Exception $e) {
+                
+            }
+            
+
 
             $app->render('formUser' , array(
+                "roles" => $roles,
+                "useroles" => array()
               
                
             ) );
@@ -55,9 +67,27 @@ class UserController{
 
             try {
                 
+                $roles = array();
+                try {
+                    $roles = \Role::all();
+
+                } catch (\Exception $e) {
+                
+                }
+
                 $model = \User::findOrFail($id);
 
-                $app->render('formUser' , array( 'user' => $model ) );
+                $rol =  $model->roles;
+                $array = array();
+                if($rol)
+                    foreach ($rol  as $o ) {
+                        $array[ ] = $o->name;
+
+                    }
+
+               
+
+                $app->render('formUser' , array( 'useroles' => $array , 'user' => $model  , 'roles' => $roles ) );
 
             } catch (\Exception $e) {
                 
@@ -82,7 +112,7 @@ class UserController{
 
                 if($app->request->post('password')  ){
                      $data['password'] = $app->request->post('password') ;
-                     $rules['password'] = "required|min:7";
+                     $rules['password'] = "required|min:2";
                 }
                
                 $data['email'] =  $app->request->post('email') ;
@@ -117,6 +147,20 @@ class UserController{
 
                 $model->save();
 
+                // necesito quitar las relaciones de roles
+                 $rol =  $model->roles;
+                $array = array();
+                if($rol)
+                    foreach ($rol  as $o ) {
+                        $model->roles()->detach($o->id);
+
+                    }
+
+                $r = $app->request->post("role");
+                
+                if( isset( $r) && is_array( $r ) )
+                    $model->roles()->attach($r);
+                    
                 
             } catch (\Exception $e) {
             	$app->flash("error", " " . $e->getMessage());
@@ -141,7 +185,7 @@ class UserController{
                 $rules['username'] = "required|unique:users";
 
                 $data['password'] = $app->request->post('password') ;
-                $rules['password'] = "required|min:7";
+                $rules['password'] = "required|min:2";
                 
                
                 $data['email'] =  $app->request->post('email') ;
@@ -178,6 +222,15 @@ class UserController{
                 $user = new \User( $array );
 
                 $user->save();
+
+
+                // Agregamos los roles
+
+                $r = $app->request->post("role");
+                
+                if( isset( $r) && is_array( $r ) )
+                    $user->roles()->attach($r);
+
 
                 
             } catch (\Exception $e) {
