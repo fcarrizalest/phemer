@@ -2,7 +2,7 @@
 
 class Permission extends \Illuminate\Database\Eloquent\Model{
 	protected $table = 'role_permission';
-
+	public $timestamps = false;
 	public function __construct(array $attributes = array())
 	{
 

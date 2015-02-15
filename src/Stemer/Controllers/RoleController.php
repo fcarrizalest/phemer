@@ -190,5 +190,65 @@ class RoleController{
 
 
 
+    public function Permissions(){
+
+        return function(){
+            $app = \Slim\Slim::getInstance();
+
+            $roles = \Role::all();
+
+            $namePerm[] = "administer permissions";
+            $namePerm[] = "administer users";
+            $namePerm[] = "view user profiles";
+
+            $app->render("permissions", array( 'namePerm' => $namePerm,   'roles' => $roles ));
+
+        };
+
+    }
+
+    public function PostPermissions(){
+        return function (){
+            $app = \Slim\Slim::getInstance();
+
+            $post = $app->request->post( );
+            unset( $post['csrf_token'] );
+
+            foreach ($post  as $adminName => $ArrayPerm) {
+                
+                $rol = \Role::where('name', '=',  $adminName )->get();
+
+
+                $rol[0]->permission()->forceDelete() ;
+                    
+                //$tm = $rol[0]->permission->toArray();
+                
+                foreach ($ArrayPerm as $key => $value) {
+                    
+
+                    $Permission = new \Permission(  array(
+                            "rid" => $rol[0]->id,
+                            "permission" => $value
+
+                        ));
+
+                    $Permission->save();
+
+                }
+                //$rol[0]->permission()->attach( $ArrayPerm );
+                
+
+
+            }
+
+
+            $app->redirect( $app->INETROOT.'/people/permissions');
+
+
+        };
+    }
+
+
+
 }
 
