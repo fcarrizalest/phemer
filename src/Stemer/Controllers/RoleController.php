@@ -35,7 +35,6 @@ class RoleController{
         }; 
     }
 
-
     public function NewRol( ){
         return function(){
             $app = \Slim\Slim::getInstance();
@@ -188,8 +187,6 @@ class RoleController{
         };
     }
 
-
-
     public function Permissions(){
 
         return function(){
@@ -214,12 +211,19 @@ class RoleController{
             $post = $app->request->post( );
             unset( $post['csrf_token'] );
 
+            $roles = \Role::all();
+
+            foreach ($roles as $rol ) {
+                $rol->permission()->forceDelete();
+
+            }
+
             foreach ($post  as $adminName => $ArrayPerm) {
                 
                 $rol = \Role::where('name', '=',  $adminName )->get();
 
 
-                $rol[0]->permission()->forceDelete() ;
+                //$rol[0]->permission()->forceDelete() ;
                     
                 //$tm = $rol[0]->permission->toArray();
                 

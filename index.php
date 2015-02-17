@@ -24,8 +24,8 @@ $app->get('/people/roles/:id/edit' , $secure->isLogin(), $secure->checkPermissio
 $app->post('/people/roles/:id' , $secure->isLogin(), $secure->checkPermission("administer permissions") , $RoleController->PostEditRol() );
 $app->post('/people/roles/:id/delete' , $secure->isLogin(), $secure->checkPermission("administer permissions") , $RoleController->PostDeleteRol() );
 
-$app->get('/people/permissions' , $secure->isLogin(), $secure->checkPermission("administer permissions") ,$RoleController->Permissions() );
 
+$app->get('/people/permissions' , $secure->isLogin(), $secure->checkPermission("administer permissions") ,$RoleController->Permissions() );
 $app->post('/people/permissions' , $secure->isLogin(), $secure->checkPermission("administer permissions") ,$RoleController->PostPermissions() );
 
 
@@ -36,8 +36,6 @@ $app->get('/people/new' ,$secure->isLogin(), $secure->checkPermission("administe
 $app->get('/people/:id/edit', $secure->isLogin(), $secure->checkPermission("administer users") ,  $UserController->EditUser()   );
 $app->post('/people/:id' , $secure->isLogin(), $secure->checkPermission("administer users") , $UserController->PostEditUser() );
 $app->post('/people/:id/delete' , $secure->isLogin(), $secure->checkPermission("administer users") , $UserController->PostDeleteUser() );
-
-
 
 
 
