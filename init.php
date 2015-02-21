@@ -4,22 +4,6 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 use Symfony\Component\Yaml\Parser;
 
-
-
-
-class CustomErrorMiddleware extends \Slim\Middleware
-{
-    public function call()
-    {
-        // Set new error output
-        $env = $this->app->environment;
-        $env['slim.errors'] = fopen('./error.log', 'w');
- 		
-        // Call next middleware
-        $this->next->call();
-    }
-}
-
 $yaml = new Parser();
 
 $value = $yaml->parse(file_get_contents('./phinx.yml'));
@@ -34,11 +18,9 @@ $db['collation'] = 'utf8_general_ci';
 
 $salt = $value['salt'];
 
-
 $capsule = new Capsule();
 
 $capsule->addConnection( $db);
-
 
 // Set the event dispatcher used by Eloquent models... (optional)
 use Illuminate\Events\Dispatcher;
@@ -54,25 +36,18 @@ $capsule->setAsGlobal();
 // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 $capsule->bootEloquent();
 
-
-
-
-
-
-//var_dump(  $validator ) ;
-
-
 $app = new \Slim\Slim(array(
          'view' => new \Slim\Views\Blade(),
          'templates.path' => './templates',
-         'log.level' => \Slim\Log::DEBUG,
+         'log.writer' => new \Stemer\Utils\StemerLog( $value['level']   ),
+         'log.level' => $value['level'],
            
     ));
+
 
 $app->container->singleton('Validator', function () use ($Container,$capsule) {
     
     $t = new \Symfony\Component\Translation\IdentityTranslator();
-
 
     $factory = new \Illuminate\Validation\Factory( $t  , $Container);
 
@@ -80,27 +55,20 @@ $app->container->singleton('Validator', function () use ($Container,$capsule) {
 
     $factory->setPresenceVerifier(  $db  );
 
-
     return $factory;
 });
 
 $app->config('debug', $value['debug']);
 
-
 $app->salt = $salt ;
 
 $app->LOCALURL_ROOT = $value['LOCALURL_ROOT'];
 $app->INETROOT = $value['INETROOT'] ;
-
-
-//
 $app->view->set("LOCALURL_ROOT" , $value['LOCALURL_ROOT'] );
-
 $app->view->set("INETROOT" , $value['INETROOT'] );
 
-
 $app->add(new \Slim\Middleware\SessionCookie(array(
-    'expires' => '20 minutes',
+    'expires' => '60 minutes',
     'path' => '/',
     'domain' => null,
     'secure' => false,
@@ -117,15 +85,5 @@ $view->parserOptions = array(
     'cache' => dirname(__FILE__) . '/cache'
 );
 
-$app->hook('slim.after.router', function () use ($app) {
-    $request = $app->request;
-    $response = $app->response;
-
-    $app->log->debug('Request path: ' . $request->getPathInfo());
-    $app->log->debug('Response status: ' . $response->getStatus());
-    // And so on ...
-});
-
-$app->add(new \CustomErrorMiddleware());
 $app->add( new \Stemer\Utils\CsrfGuard() );
 ?>

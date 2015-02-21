@@ -13,6 +13,7 @@
  */
 namespace Stemer\Utils;
 
+
 class CsrfGuard extends \Slim\Middleware
 {
     /**
@@ -69,6 +70,7 @@ class CsrfGuard extends \Slim\Middleware
 
         $token = $_SESSION[$this->key];
 
+        $this->app->log->debug("Token a validar: " . $token );
         // Validate the CSRF token.
         if (in_array($this->app->request()->getMethod(), array('POST', 'PUT', 'DELETE'))) {
             $userToken = $this->app->request()->post($this->key);

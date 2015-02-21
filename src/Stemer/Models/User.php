@@ -24,8 +24,6 @@ class User extends \Illuminate\Database\Eloquent\Model
     public function getPermissionArray(){
     	$permissionArray = array();
 
-
-
     	$roles = $this->roles;
     	if (count( $roles  ) > 0 ) {
     	 		

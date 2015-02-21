@@ -10,7 +10,7 @@ class Security {
             $app = \Slim\Slim::getInstance();
             if ( !isset($_SESSION['stemer_ticket'] ) ) {
                 
-                //$app->flash('error', 'Login required');
+                $app->flash('error', 'Login required');
                 
                 $app->redirect( $app->INETROOT.'/login');
 
@@ -29,8 +29,6 @@ class Security {
             $app->view->set("permission" , $app->_permission );
 
             // Tenemos el ticket Comprobamos.
-
-
 
         };
 
@@ -64,12 +62,6 @@ class Security {
         $app->log->error("Creamos un ticket: " .  $ticket );
         $ti->save() ;
         $_SESSION['stemer_ticket'] =  $ticket ;
-
-           
-
-        
-
-
   
     }
 
@@ -85,7 +77,7 @@ class Security {
             $ticketO = \Ticket::where('ticketid', '=', $ticket  )->where('clientip','=',$req -> getIp() )->firstOrFail();
             $ticketO->touch(); 
             $ticketO->save();
-            $app->log->alert( $ticketO->user );
+          
             
             $ticketD = \Ticket::where('uid', '=', $ticketO->user->id  )
                                 ->where('ticketid', '!=', $ticket );
@@ -96,10 +88,10 @@ class Security {
             return $ticketO->user;
 
         } catch (\Exception $e) {
-             unset($_SESSION['stemer_ticket'] );
-             $app->log->error( "Ocurrio un error. " );
-             $app->log->error( $e );
-              $app->flash("error", " " . $e->getMessage());
+            unset($_SESSION['stemer_ticket'] );
+            $app->log->error( "Ocurrio un error. " );
+            $app->log->error( $e );
+            $app->flash("error", " " . $e->getMessage());
                 
                
         }

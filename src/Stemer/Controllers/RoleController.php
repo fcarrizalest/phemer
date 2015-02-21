@@ -132,7 +132,7 @@ class RoleController{
             try {
 
 
-            	$app->log->alert("Oj vamos a agrega nuevo Rol");
+            	
                 
 
                 $data['name'] = $app->request->post('name');

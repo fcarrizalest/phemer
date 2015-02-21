@@ -10,26 +10,12 @@ class Controller {
 
             $app = \Slim\Slim::getInstance();
             
-        
+            $app->log->debug("hola Home");
             $app->render('home' );      
 
         };
 
     }
-
-
-    
-
-   
-
-
-    
-
-   
-
-    
-
-    
 
 
     public function PostLogin(){
@@ -67,9 +53,6 @@ class Controller {
     			$app->log->debug( $e ->getMessage());
                 $app->flash("error", " Error Processing Request " );
                 
-               
-    			
-    			
     		}
 			
 			if( $error ){
@@ -82,6 +65,7 @@ class Controller {
 
     	};
     }
+
 
     public function LoginForm(){
     	return function(){
@@ -117,9 +101,6 @@ class Controller {
     }
 
 
-
-
-
     public  function LogOut(){
     	return function (){
     		$app = \Slim\Slim::getInstance();
@@ -127,7 +108,6 @@ class Controller {
     		if( isset( $_SESSION['stemer_ticket'] )){
                 //Necesitamos borrar el ticket actual.
                 $t = $_SESSION['stemer_ticket'];
-
                 
        			unset( $_SESSION['stemer_ticket']  );
                 try {
@@ -141,7 +121,7 @@ class Controller {
                 }
                 
     		}
-            unset( $_SESSION);
+            unset( $_SESSION['stemer_ticket']);
 
            
     		$app->redirect( $app->INETROOT.'/login');

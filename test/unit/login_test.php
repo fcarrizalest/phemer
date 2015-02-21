@@ -37,11 +37,11 @@ class TestOfLogin extends WebTestCase{
 
 		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/login" , $parameters  );
 		unset( $parameters );
-		sleep(1);
+		
 		$this->assertText('Dashboard', "Deberiamos estar logueados");
 
 		$this->get( $this->_LOCALURL_ROOT.$this->_INETROOT."/logout");
-		sleep(1);
+		
  		$this->assertText('Sign In');
 
 		$parameters['username'] = "admi";
@@ -54,7 +54,7 @@ class TestOfLogin extends WebTestCase{
 
 
 		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/login" , $parameters  );
-		sleep(1);
+		
 
 		$this->assertText('Sign In');
 
@@ -68,18 +68,14 @@ class TestOfLogin extends WebTestCase{
 
 
 		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/login" , $parameters  );
-		sleep(1);
+		
 		unset( $parameters );
 		$this->assertText('Dashboard', "Deberiamos estar logueados");
 
 
 		//  CheckTicket... 
-
-		 
-
-
 		$this->get( $this->_LOCALURL_ROOT.$this->_INETROOT."/index.php" );
-		sleep(1);
+		
 		$this->assertText('Dashboard', "Deberiamos estar logueados");
 
 
