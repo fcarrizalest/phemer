@@ -38,7 +38,7 @@ $app->post('/people/:id' , $secure->isLogin(), $secure->checkPermission("adminis
 $app->post('/people/:id/delete' , $secure->isLogin(), $secure->checkPermission("administer users") , $UserController->PostDeleteUser() );
 
 
-
+$app->get('/profile/me' , $secure->isLogin(), $UserController->OwnProfile()  );
 
 
 

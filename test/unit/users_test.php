@@ -31,6 +31,7 @@ class TestOfUsers extends WebTestCase{
 
 		$parameters['csrf_token'] = $csrf_token ;
 
+		
 		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/login" , $parameters  );
 	
 

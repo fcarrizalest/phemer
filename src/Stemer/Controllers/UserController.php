@@ -16,6 +16,17 @@ class UserController{
         };
     }
 
+    public function OwnProfile(){
+        return function () { 
+
+            $app = \Slim\Slim::getInstance();
+            $app->render('profile' );
+            
+
+
+        };
+    }
+
      public function PostDeleteUser(){
 
         return function($id){
