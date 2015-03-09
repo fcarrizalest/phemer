@@ -99,8 +99,24 @@ class TestOfUsers extends WebTestCase{
 		$this->assertTrue($encontrado , "No encontre a mi nuevo usuario");
 		unset($data);
 		$data['csrf_token'] = $this->_csrf_token;
-		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/people/".$idNuevoUsuaro."/	delete" , $data  );
 
+		$this->post( $this->_LOCALURL_ROOT.$this->_INETROOT."/people/".$idNuevoUsuaro."/delete" , $data  );
+
+		// Obtenemos la Lista de Usuarios.
+		$listaU = $this->get(  $this->_LOCALURL_ROOT.$this->_INETROOT."/api/people"  );
+		$listaU = json_decode( $listaU , true  );
+		$encontrado = false;
+		$idNuevoUsuaro = "0";
+		if($listaU )
+			foreach ($listaU as $key => $value) {
+				# code...
+				if( $value['username'] == "user1" ){
+					$encontrado = true;
+					
+				}
+			}
+
+		$this->assertFalse( $encontrado, "No Borro el usuario Creado" );
 
 		// Errores
 
@@ -134,7 +150,7 @@ class TestOfUsers extends WebTestCase{
 
 		$this->assertPattern("/Error/");
 
-		
+
 	}
 
 
