@@ -68,7 +68,7 @@ $app->view->set("LOCALURL_ROOT" , $value['LOCALURL_ROOT'] );
 $app->view->set("INETROOT" , $value['INETROOT'] );
 
 $app->add(new \Slim\Middleware\SessionCookie(array(
-    'expires' => '60 minutes',
+    'expires' => '90 minutes',
     'path' => '/',
     'domain' => null,
     'secure' => false,

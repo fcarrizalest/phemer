@@ -12,7 +12,6 @@ $UserController = new \Stemer\Controllers\UserController();
 
 $RoleController = new \Stemer\Controllers\RoleController();
 
-
 $secure = new \Stemer\Security();
 
 $app->get('/',$secure->isLogin(), $Controller->DashBoard() );
@@ -37,6 +36,8 @@ $app->get('/people/:id/edit', $secure->isLogin(), $secure->checkPermission("admi
 $app->post('/people/:id' , $secure->isLogin(), $secure->checkPermission("administer users") , $UserController->PostEditUser() );
 $app->post('/people/:id/delete' , $secure->isLogin(), $secure->checkPermission("administer users") , $UserController->PostDeleteUser() );
 
+// Api people
+$app->get('/api/people' , $secure->isLogin(), $secure->checkPermission("administer users") ,$UserController->ApiPeople() );
 
 $app->get('/profile/me' , $secure->isLogin(), $UserController->OwnProfile()  );
 
@@ -48,7 +49,5 @@ $app->get('/logout',$Controller->LogOut() );
 
 
 $app->run();
-
-
 
 ?>

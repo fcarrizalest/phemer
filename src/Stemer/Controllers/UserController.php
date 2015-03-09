@@ -16,6 +16,17 @@ class UserController{
         };
     }
 
+    public function ApiPeople(){
+        return function(){
+            $app = \Slim\Slim::getInstance();
+            $app->response->headers->set('Content-Type', 'application/json');
+            $users =  \User::all( array('id', 'username' ) );
+
+            echo $users;
+
+        };
+    }
+
     public function OwnProfile(){
         return function () { 
 

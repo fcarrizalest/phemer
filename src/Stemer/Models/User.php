@@ -3,7 +3,7 @@
 class User extends \Illuminate\Database\Eloquent\Model
 {
 
-
+    
 
 	public function __construct(array $attributes = array())
 	{
