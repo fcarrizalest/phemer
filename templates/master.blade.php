@@ -5,21 +5,12 @@
     <title>Phener | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.1 -->
-     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+     <link href="{{{$INETROOT}}}/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- FontAwesome 4.2.0 -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{{$INETROOT}}}/dist/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons 2.0.0 -->
-    <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- Morris chart -->
-    <link href="{{{$INETROOT}}}/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
-    <!-- jvectormap -->
-    <link href="{{{$INETROOT}}}/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <!-- Date Picker -->
-    <link href="{{{$INETROOT}}}/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-    <!-- Daterange picker -->
-    <link href="{{{$INETROOT}}}/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link href="{{{$INETROOT}}}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{{$INETROOT}}}/dist/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    
     <!-- Theme style -->
     <link href="{{{$INETROOT}}}/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
@@ -44,7 +35,7 @@
     }
     </style>
   </head>
-  <body class="skin-blue">
+  <body class="skin-black">
     <div class="wrapper">
       <!-- header logo: style can be found in header.less -->
       <header class="main-header">
@@ -280,6 +271,6 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     
     <!-- AdminLTE for demo purposes -->
-    <script src="{{{$INETROOT}}}/dist/js/demo.js" type="text/javascript"></script>
+    
   </body>
 </html>
